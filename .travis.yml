@@ -1,5 +1,6 @@
 install:
   - sudo pip install git+https://github.com/google/closure-linter.git
+  - nvm install 0.10
   - ./do.sh install_deps
 
 script:
