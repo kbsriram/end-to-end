@@ -5,7 +5,7 @@ env:
 
 install:
   - sudo pip install git+https://github.com/google/closure-linter.git
-  - nvm install ${NODEJS_VERSION} && nvm use ${NODEJS_VERSION}
+  - nvm install ${NODEJS_VERSION} && nvm alias default ${NODEJS_VERSION}
   - ./do.sh install_deps
 
 script:
