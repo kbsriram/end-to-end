@@ -20,7 +20,7 @@
 PYTHON_CMD="python"
 JSCOMPILE_CMD="java -jar lib/closure-compiler/build/compiler.jar --flagfile=compiler.flags"
 CKSUM_CMD="cksum" # chosen because it's available on most Linux/OS X installations
-NODEJS_CMD="nodejs"
+NODEJS_CMD="${NODEJS_CMD:-nodejs}"
 BUILD_DIR="build"
 BUILD_TPL_DIR="$BUILD_DIR/templates"
 cd ${0%/*}
