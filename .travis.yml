@@ -5,9 +5,11 @@ env:
 
 install:
   - sudo pip install git+https://github.com/google/closure-linter.git
-  - nvm install ${NODEJS_VERSION}
-  - nvm use ${NODEJS_VERSION}
+  - nvm install ${NODEJS_VERSION} && nvm use ${NODEJS_VERSION}
   - ./do.sh install_deps
 
 script:
+  - ./do.sh lint
+  - ./do.sh build_app debug
   - ./do.sh test_compatibility
+  - ./do.sh clean
