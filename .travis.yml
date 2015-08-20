@@ -1,9 +1,13 @@
+env:
+  global:
+    - NODEJS_VERSION=0.10
+    - NODEJS_CMD=node
+
 install:
   - sudo pip install git+https://github.com/google/closure-linter.git
-  - nvm install 0.10
-  - nvm use 0.10
+  - nvm install ${NODEJS_VERSION}
+  - nvm use ${NODEJS_VERSION}
   - ./do.sh install_deps
 
 script:
-  - ./do.sh build_extension debug
-  - NODEJS_CMD="node" ./do.sh test_compatibility
+  - ./do.sh test_compatibility
