@@ -160,7 +160,7 @@ e2e_build_library() {
   echo "Done."
 }
 
-e2e_test_compatibility() {
+e2e_test_compat_e2e() {
   e2e_assert_nodejs
   e2e_assert_dependencies
   set -e
@@ -168,11 +168,12 @@ e2e_test_compatibility() {
   BUILD_EXT_DIR="$BUILD_DIR/library"
   rm -rf "$BUILD_EXT_DIR"
   mkdir -p "$BUILD_EXT_DIR"
-  echo "Building End-To-End debug library into $BUILD_DIR/library..."
+  echo -n "Building End-To-End debug library into $BUILD_DIR/library..."
   e2e_build_closure_lib_ "e2e.openpgp.ContextImpl" "$BUILD_EXT_DIR/end-to-end.debug.js" "" "debug"
+  echo
   echo "Running compatibility tests..."
   TEST_ROOT="src/javascript/crypto/e2e/compatibility_tests"
-  $NODEJS_CMD "$TEST_ROOT/run.js" "$BUILD_EXT_DIR/end-to-end.debug.js" "$TEST_ROOT/testcases"
+  $NODEJS_CMD "$TEST_ROOT/drivers/e2e/run.js" "$BUILD_EXT_DIR/end-to-end.debug.js" "$TEST_ROOT/testcases"
   echo "Done."
 }
 
@@ -358,8 +359,8 @@ case "$CMD" in
   build_library)
     e2e_build_library;
     ;;
-  test_compatibility)
-    e2e_test_compatibility;
+  test_compat_e2e)
+    e2e_test_compat_e2e;
     ;;
   build_templates)
     e2e_build_templates;
@@ -386,7 +387,7 @@ case "$CMD" in
     e2e_generate_deps;
     ;;
   *)
-    echo "Usage: $0 {build_app|build_extension|build_library|build_templates|build_docs|clean|check_deps|clean_deps|install_deps|testserver|test_compatibility|lint} [debug]"
+    echo "Usage: $0 {build_app|build_extension|build_library|build_templates|build_docs|clean|check_deps|clean_deps|install_deps|testserver|test_compat_e2e|lint} [debug]"
     RETVAL=1
 esac
 
